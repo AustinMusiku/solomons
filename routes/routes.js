@@ -1,6 +1,13 @@
 const express = require('express');
-
+let db = require('../config/db');
 const router = express.Router();
+
+// initialize database connection
+let dbConnection = db.connection;
+dbConnection.connect((err) => {
+    if(err) throw err;
+    console.log('connection established!')
+});
 
 //get requests
 router.get('/', (req, res) => {
