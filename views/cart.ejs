@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Solomons Honey | Shop </title>
+</head>
+<body>
+    <header class="header-minor">
+        <%- include('./partials/nav') %>
+        <div class="hero-grid grid">
+            <div class="hero">
+                <h3 class="caption">shop</h3>
+                <h1 class="title">My Cart</h1>
+            </div>
+        </div>
+    </header>
+
+    <section id="cart" class="grid">
+        <div class="container">
+            <div class="cart-grid">
+                <div class="cart-item">
+                    <div class="cart-item-txt">
+                        <div class="cart-item-txt-about">
+                            <p>500g Honey jar</p>
+                            <h2 class="sub-title">Ksh 134</h2>
+                        </div>
+                            
+                        <div class="quantity">
+                            <button>-</button>1<button>+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <div class="cart-item-txt">
+                        <div class="cart-item-txt-about">
+                            <p>500g Honey jar</p>
+                            <h2 class="sub-title">Ksh 134</h2>
+                        </div>
+                            
+                        <div class="quantity">
+                            <button>-</button>1<button>+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <div class="cart-item-txt">
+                        <div class="cart-item-txt-about">
+                            <p>500g Honey jar</p>
+                            <h2 class="sub-title">Ksh 134</h2>
+                        </div>
+                            
+                        <div class="quantity">
+                            <button>-</button>1<button>+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <div class="cart-item-txt">
+                        <h2>Total</h2>
+                        <div class="lower-cart-item-txt">
+                            <h2 class="sub-title">Ksh 134</h2>
+                            <a href="/checkout" class="btn cta">Proceed to checkout</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <%- include('./partials/footer') %>
+
+    <!--scripts-->
+    <%- include('./partials/scripts'); %>
+</body>
+</html>

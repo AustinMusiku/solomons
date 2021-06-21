@@ -1,0 +1,170 @@
+@import 'variables';
+
+// -----NAV------
+// -----NAV------
+nav{
+    padding: 1em 0;
+
+    .container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .nav-links{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            .nav-link{
+                padding: 1em;
+            }
+
+            a[href="/cart"]{
+                display: grid;
+                place-items: center;
+                margin: 0 0 0 3em;
+            }
+        }
+
+        .ham-menu{
+            display: none;
+        }
+    }
+}
+
+// watermark
+
+.water-mark{
+    position: absolute;
+    z-index: -10;
+
+}
+
+
+
+// buttons and cta(s)
+.btn,
+button{
+    margin: 0;
+    padding: 1em 1.75em;
+    width: fit-content;
+    border: none;
+    outline: none;
+    background-color: $light;
+    border: 2px solid $accent;
+    cursor: pointer;
+
+    &.cta{
+        background-color: $accent;
+        color: $dark;
+    }
+
+    &.cta2{
+        background-color: $accent;
+        color: $dark;
+        border: 2px solid $dark;
+    }
+}
+
+a{
+    .cta{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        place-items: center;
+        width: fit-content;
+    }
+
+    .cta2{
+        background-color: $accent;
+        color: $dark;
+        border: 2px solid $dark;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 768px){
+    // watermark
+    .water-mark{
+        display: none;
+    }
+
+    // -----NAV------
+    nav{
+        .container{
+            position: static;
+            .nav-links{
+                position: absolute;
+                flex-direction: column;
+                align-items: center;
+                padding: 8em 4em;
+                width: 100vw;
+                height: 100vh;
+                left: -200%;
+                top: 0;
+                // border: 1px solid black;
+                background-color: $dark;
+                z-index: 20;
+                transition: .15s ease-in;
+
+                .nav-link{
+                    color: $light;
+                    padding: 1em;
+                    width: 100%;
+                    text-align: center;
+                }
+                button{
+                    margin: 0;
+                    background-color: $accent;
+                }
+
+                &.active{
+                    left: 0%;
+                }
+            }
+    
+            .ham-menu{
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 45px;
+                height: 15px;
+                z-index: 100;
+    
+                .ham-layer{
+                    position: absolute;
+                    width: 75%;
+                    height: 3px;
+                    background-color: $dark;
+                    border-radius: 50px;
+                    transition: .05s ease-in;
+
+                    &.ham-layer-left{
+                        left: 0;
+                        top: 0;
+                    }
+                    &.ham-layer-right{
+                        right: 0;
+                        bottom: 0;
+                    }
+
+                    &.ham-layer-left,
+                    &.ham-layer-right{
+
+                        &.active{
+                            width: 100%;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            background-color: $light;
+                            transition: .05s ease-in;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}

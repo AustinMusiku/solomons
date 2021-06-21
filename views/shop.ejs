@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Solomons Honey | Shop </title>
+</head>
+<body>
+    <header class="header-minor">
+        <%- include('./partials/nav') %>
+        <div class="hero-grid grid">
+            <div class="hero">
+                <h3 class="caption">Get some honey today</h3>
+                <h1 class="title">Shop</h1>
+            </div>
+        </div>
+    </header>
+
+    <section id="shop" class="grid">
+        <div class="container">
+            <div class="section-heading">
+                <h3 class="caption">Who are we</h3>
+                <h2 class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda?</h2>
+            </div>
+
+            <div class="products-grid">
+                <div class="product">
+                    <img src="../public/assets/jar.jpg" alt="">
+                    <div class="product-txt">
+                        <p>500g Honey jar</p>
+                        <h2 class="sub-title">Ksh 134</h2>
+                        <button class="btn cta">Add to cart</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <%- include('./partials/footer') %>
+
+    <!--scripts-->
+    <%- include('./partials/scripts'); %>
+</body>
+</html>

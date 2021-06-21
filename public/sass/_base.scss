@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    width: 100vw;
+    overflow-x: hidden;
+}
+img{
+    width: 100%;
+}
+
+.bg-accent{
+    background-color: $accent;
+}
+.bg-dark{
+    background-color: $dark;
+}
+.bg-light{
+    background-color: $light;
+}

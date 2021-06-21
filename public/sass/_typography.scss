@@ -1,0 +1,74 @@
+@import 'variables';
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+*{
+    text-align: center;
+}
+
+.title{
+    font-size: $ff-xl;
+    font-weight: $fw-400;
+    font-family: $f-heading;
+}
+.sub-title{
+    font-size: $ff-l;
+    font-weight: $fw-400;
+    font-family: $f-heading;
+    letter-spacing: .05em;
+    margin-bottom: 1em;
+}
+.caption{
+    font-size: $ff-sm;
+    font-family: $f-body;
+    font-weight: $fw-400;
+    text-transform: uppercase;
+}
+p,a{
+    font-size: $ff-body;
+    font-weight: $fw-400;
+    font-family: $f-body;
+    color: $dark;
+    line-height: 1.6;
+}
+a{
+    text-transform: capitalize;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+    color: $accent;
+}
+i{
+    font-size: $ff-l;
+    cursor: pointer;
+}
+.clr-accent{
+    *{
+        color: $accent;
+    }
+}
+.clr-dark{
+    *{
+        color: $dark;
+    }
+}
+.clr-light{
+    *{
+        color: $light;
+    }
+}
+
+.water-mark{
+    .title{
+        font-size: $ff-xxl;
+        color: $watermark;
+        line-height: .75;
+    }
+}
+footer{
+    p,a{
+        font-size: $ff-sm;
+        line-height: 1.6;
+    }
+}
