@@ -268,6 +268,27 @@ header{
                 }
             }
         }
+        .cart-total{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 2em;
+            padding: 0 1em;
+
+            .cart-total-txt{
+                h2{
+                    margin: 0;
+                }
+            }
+            .cart-total-controls{
+                display: grid;
+                place-items: center;
+
+                .btn{
+                    font-size: .8em;
+                }
+            }
+        }
     }
 }
 

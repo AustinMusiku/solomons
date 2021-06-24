@@ -51,15 +51,21 @@ router.get('/faqs', (req, res) => {
 router.get('/cart', (req, res) => {
     console.log(`/cart  - ${req.session.userId}`);
     // assign cart items to cart
-    let cart = req.session.cart;
-    res.render('cart', { msg: "cart", cart: cart})
+    //  let cart = req.session.cart;
+    //  res.render('cart', { msg: "cart", cart: cart})
+    res.render('cart', { msg: "cart" })
 })
-
+router.get('/getCartItems', (req, res) => {
+    let cartItems = req.session.cart;
+    res.json({ cartItems })
+})
 router.get('/checkout', (req, res) => {
     console.log('/checkout');
     res.render('checkout', { msg: "checkout"})
 })
 
+
+// POST REQUESTS
 router.post('/addToCart', (req, res) => {
     console.log('/addToCart');
     // assign new cart if none exists
@@ -79,7 +85,30 @@ router.post('/addToCart', (req, res) => {
                 res.json({msg: `${row.Title} added to cart`});
             }
         })
+})
+
+router.post('/removeFromCart', (req, res) => {
+    console.log('/removeFromCart');
+    let itemId = req.body.itemId;
+    // fetch product
+    controllers.getItemById(itemId)
+        .then(row => {
+            req.session.cart = req.session.cart.filter(product => {
+                return product.Id != row.Id;
+            })
+            res.json({
+                msg: `${row.Title} removed from cart`,
+                rowTitle: row.Title
+            });
+        })
+})
+
+router.post('/incrementCartItem', (req, res) => {
     
+})
+
+router.post('/decrementCartItem', (req, res) => {
+
 })
 
 module.exports = router;
