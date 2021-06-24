@@ -1,8 +1,15 @@
 let mysql = require('mysql');
 
-exports.connection = mysql.createConnection({
+let connection = mysql.createConnection({
     host: 'localhost',
-    user: 'austinmu_AustinMusiku',
-    password: `${process.env.DATABASE_PASSWORD}`,
-    database: 'austinmu_Solomons_honey'
+    user: process.env.DATABASE_USER || 'root',
+    password: process.env.PASSWORD || '70949901',
+    database: process.env.NAME || 'solomons'
 });
+
+connection.connect((err) => {
+    if(err) throw err;
+    console.log('connection successful!');
+})
+
+module.exports = connection;

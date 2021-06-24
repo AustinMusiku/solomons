@@ -18,55 +18,24 @@
     <section id="cart" class="grid">
         <div class="container">
             <div class="cart-grid">
+
+                <% cart.forEach((cartItem) => { %>
                 <div class="cart-item">
                     <div class="cart-item-txt">
                         <div class="cart-item-txt-about">
-                            <p>500g Honey jar</p>
-                            <h2 class="sub-title">Ksh 134</h2>
+                            <p><%=cartItem.Title%></p>
+                            <h2 class="sub-title">Ksh. <%=cartItem.Unit_Price%></h2>
                         </div>
                             
-                        <div class="quantity">
-                            <button>-</button>1<button>+</button>
+                        <div class="card-item-txt-controls">
+                            <div class="quantity">
+                                <button class="cta" onclick="decrementCartItem('<%=cartItem.Id%>')">-</button><span class="quantityNumber"></span><button class="cta" onclick="incrementCartItem('<%=cartItem.Id%>')">+</button>
+                            </div>
+                            <button class="btn cta" onclick="removeFromCart('<%=cartItem.Id%>')">Remove</button>
                         </div>
                     </div>
                 </div>
-
-                <div class="cart-item">
-                    <div class="cart-item-txt">
-                        <div class="cart-item-txt-about">
-                            <p>500g Honey jar</p>
-                            <h2 class="sub-title">Ksh 134</h2>
-                        </div>
-                            
-                        <div class="quantity">
-                            <button>-</button>1<button>+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cart-item">
-                    <div class="cart-item-txt">
-                        <div class="cart-item-txt-about">
-                            <p>500g Honey jar</p>
-                            <h2 class="sub-title">Ksh 134</h2>
-                        </div>
-                            
-                        <div class="quantity">
-                            <button>-</button>1<button>+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="cart-item">
-                    <div class="cart-item-txt">
-                        <h2>Total</h2>
-                        <div class="lower-cart-item-txt">
-                            <h2 class="sub-title">Ksh 134</h2>
-                            <a href="/checkout" class="btn cta">Proceed to checkout</a>
-                        </div>
-                    </div>
-                </div>
-
+                <% }) %>
             </div>
         </div>
     </section>
@@ -74,6 +43,52 @@
     <%- include('./partials/footer') %>
 
     <!--scripts-->
+    <script>
+        let removeFromCart = async(itemId) => {
+            let url = '/removeFromCart';
+            let data = {itemId};
+            let options = {
+                method: 'POST',
+                Headers: {
+                    'Content-Type': 'Application/json'
+                },
+                body: JSON.stringify(data)
+            }
+            let response = await fetch(url, options);
+            let json = response.json();
+            console.log(json);
+        }
+
+        let decrementCartItem = async(itemId) => {
+            let url = '/DecrementCartItem';
+            let data = {itemId};
+            let options = {
+                method: 'POST',
+                Headers: {
+                    'Content-Type': 'Application/json'
+                },
+                body: JSON.stringify(data)
+            }
+            let response = await fetch(url, options);
+            let json = response.json();
+            console.log(json);
+        }
+
+        let incrementCartItem = async(itemId) => {
+            let url = '/DecrementCartItem';
+            let data = {itemId};
+            let options = {
+                method: 'POST',
+                Headers: {
+                    'Content-Type': 'Application/json'
+                },
+                body: JSON.stringify(data)
+            }
+            let response = await fetch(url, options);
+            let json = response.json();
+            console.log(json);
+        }
+    </script>
     <%- include('./partials/scripts'); %>
 </body>
 </html>

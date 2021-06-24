@@ -1,48 +1,85 @@
 const express = require('express');
-let db = require('../config/db');
 const router = express.Router();
+const controllers = require('../controllers/controllers')
 
 // initialize database connection
-let dbConnection = db.connection;
-dbConnection.connect((err) => {
-    if(err) throw err;
-    console.log('connection established!')
-});
+let db = require('../config/db');
 
-//get requests
+// MIDLEWARE
+router.use(express.urlencoded({extended: true}));
+router.use(express.json());
+router.use((req, res, next) => {
+    // assign new session userId for first time visitors
+    if(!req.session.userId){
+        req.session.userId = controllers.generateUuid();
+    }
+    next();
+})
+
+// GET REQUESTS
 router.get('/', (req, res) => {
-    console.log('/home');
+    console.log(`/home  - ${req.session.userId}`);
     res.render('home', { msg: "Homepage"})
 })
 
 router.get('/about', (req, res) => {
-    console.log('/about');
+    console.log(`/about  - ${req.session.userId}`);
     res.render('about', { msg: "about"})
 })
 
 router.get('/contact', (req, res) => {
-    console.log('/contact');
+    console.log(`/contact  - ${req.session.userId}`);
     res.render('contact', { msg: "contact"})
 })
 
-router.get('/shop', (req, res) => {
-    console.log('/shop');
-    res.render('shop', { msg: "shop"})
+router.get('/shop', async (req, res) => {
+    console.log(`/shop  - ${req.session.userId}`);
+    let products = [];
+    // fetch products
+    controllers.getProducts()
+        .then(rows => {
+            products = rows;
+            res.render('shop', { products: products })
+        })
 })
 
 router.get('/faqs', (req, res) => {
-    console.log('/faqs');
+    console.log(`/faqs  - ${req.session.userId}`);
     res.render('faqs', { msg: "faqs"})
 })
 
 router.get('/cart', (req, res) => {
-    console.log('/cart');
-    res.render('cart', { msg: "cart"})
+    console.log(`/cart  - ${req.session.userId}`);
+    // assign cart items to cart
+    let cart = req.session.cart;
+    res.render('cart', { msg: "cart", cart: cart})
 })
 
 router.get('/checkout', (req, res) => {
     console.log('/checkout');
     res.render('checkout', { msg: "checkout"})
+})
+
+router.post('/addToCart', (req, res) => {
+    console.log('/addToCart');
+    // assign new cart if none exists
+    !req.session.cart ? req.session.cart = []: req.session.cart;
+    let itemId = req.body.itemId;
+    //fetch cart entries
+    controllers.getItemById(itemId)
+        .then(row => {
+            // Avoid duplicate cart entries
+            let cartItemIds = req.session.cart.map(elem => elem.Id);
+            if(cartItemIds.includes(row.Id)){
+                // respond with plain msg
+                res.json({msg: `${row.Title} is already in cart`});
+            }else{
+                // push new product to cart
+                req.session.cart.push(row);
+                res.json({msg: `${row.Title} added to cart`});
+            }
+        })
+    
 })
 
 module.exports = router;

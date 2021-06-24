@@ -23,15 +23,16 @@
             </div>
 
             <div class="products-grid">
-                <div class="product">
-                    <img src="../public/assets/jar.jpg" alt="">
-                    <div class="product-txt">
-                        <p>500g Honey jar</p>
-                        <h2 class="sub-title">Ksh 134</h2>
-                        <button class="btn cta">Add to cart</button>
+                <% products.forEach((product) => { %>
+                    <div class="product">
+                        <img src="..<%=product.Img_Url%>" alt="">
+                        <div class="product-txt">
+                            <p><%=product.Title%></p>
+                            <h2 class="sub-title">Ksh. <%=product.Unit_Price%></h2>
+                            <button onclick="addToCart('<%=product.Id%>')" class="btn cta">Add to cart</button>
+                        </div>
                     </div>
-                </div>
-
+                <% }) %>
             </div>
         </div>
     </section>
@@ -39,6 +40,22 @@
     <%- include('./partials/footer') %>
 
     <!--scripts-->
+    <script>
+        let addToCart = async (itemId)=> {
+            let url = '/addToCart';
+            let data = { itemId };
+            let response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'same-origin',
+                    body: JSON.stringify(data)
+                })
+            let res = await response.json();
+            console.log(res); 
+        }
+    </script>
     <%- include('./partials/scripts'); %>
 </body>
 </html>
