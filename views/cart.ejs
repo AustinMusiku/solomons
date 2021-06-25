@@ -24,7 +24,7 @@
             <div class="cart-total">
                 <div class="cart-total-txt">
                     <p>Total</p>
-                    <h2 class="sub-title">Ksh. 450</h2>
+                    <h2 class="sub-title">Ksh. <span class="total">0</span></h2>
                 </div>
                     
                 <div class="cart-total-controls">
@@ -40,25 +40,35 @@
     <!--scripts-->
     <script>
         let cartGrid = document.querySelector('.cart-grid');
+        
+        async function cartTotal(){
+            let total = 0;
+            let cartItems = Array.from(document.querySelectorAll('.cart-item'));
+            cartItems.forEach(cartItem => {
+                let unitPrice = cartItem.children[0].children[0].children[1].children[0].innerHTML;
+                let quantity = cartItem.children[0].children[1].children[0].children[1].innerHTML;
+                total = total + (unitPrice*quantity);
+            })
+            console.log(total);
+            document.querySelector('.total').innerHTML = total;
+        }
 
-        window.onload = async (e) => {
+        async function loadCart(e){
             let url = '/getCartItems';
             let response = await fetch(url);
             let data = await response.json();
-            console.log(data.cartItems);
 
             data.cartItems.forEach(cartItem => {
-                // console.log(cartItem.Id);\
                 let item = `
                     <div class="cart-item-txt">
                         <div class="cart-item-txt-about">
                             <p>${cartItem.Title}</p>
-                            <h2 class="sub-title">Ksh. ${cartItem.Unit_Price}</h2>
+                            <h2 class="sub-title">Ksh. <span class="price">${cartItem.Unit_Price}</span></h2>
                         </div>
                             
                         <div class="card-item-txt-controls">
                             <div class="quantity">
-                                <button class="cta" onclick="decrementCartItem('${cartItem.Id}')">-</button><span class="quantityNumber">1</span><button class="cta" onclick="incrementCartItem('${cartItem.Id}')">+</button>
+                                <button class="cta" onclick="decrementCartItem('${cartItem.Id}', this)">-</button><span class="quantityNumber">${cartItem.Quantity}</span><button class="cta" onclick="incrementCartItem('${cartItem.Id}', this)">+</button>
                             </div>
                             <button class="btn cta" onclick="removeFromCart('${cartItem.Id}')">Remove</button>
                         </div>
@@ -68,6 +78,7 @@
                 cartGrid.appendChild(cartItemm);
                 cartItemm.classList.add('cart-item');
                 cartItemm.innerHTML = item;
+                cartTotal()
             });
         }
 
@@ -87,48 +98,58 @@
             let cartItems = document.querySelectorAll('.cart-item');
             cartItems.forEach(cartItem => {
                 if(cartItem.children[0].children[0].children[0].innerHTML == itemName){
-                    cartItem.style.display = 'none';
+                    // removes node
+                    cartItem.remove();
                 }
             })
             console.log(res);
+            await cartTotal();
         }
 
-        let decrementCartItem = async(itemId) => {
-            {// let url = '/DecrementCartItem';
-            // let data = {itemId};
-            // let options = {
-            //     method: 'POST',
-            //     Headers: {
-            //         'Content-Type': 'Application/json'
-            //     },
-            //     body: JSON.stringify(data)
-            // }
-            // let response = await fetch(url, options);
-            // let json = response.json();
-            // console.log(json);
+        let decrementCartItem = async(itemId, thise) => {
+            if(thise.nextSibling.innerHTML == '1'){
+                let data = {
+                    msg: 'Item is already 1'
+                }
+                console.log(JSON.stringify(data));
+            }else{
+                let url = '/decrementCartItem';
+                let data = { itemId }
+                let options = {
+                    method: 'POST',
+                    mode: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }
+                let response = await fetch(url, options);
+                let res = await response.json();
+                console.log(res);
+                thise.nextSibling.innerHTML = res.newQuantity;
+                await cartTotal();
             }
-            let number = document.querySelector('quantityNumber');
-            number--; 
         }
 
-        let incrementCartItem = async(itemId) => {
-        {
-            let url = '/DecrementCartItem';
-            let data = {itemId};
+        let incrementCartItem = async(itemId, thise) => { 
+            let url = '/incrementCartItem';
+            let data = { itemId }
             let options = {
                 method: 'POST',
-                Headers: {
-                    'Content-Type': 'Application/json'
+                mode: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             }
             let response = await fetch(url, options);
-            let json = response.json();
-            console.log(json);
+            let res = await response.json();
+            console.log(res);
+            thise.previousSibling.innerHTML = res.newQuantity;
+            await cartTotal();
         }
-            let number = document.querySelector('quantityNumber');
-            number++; 
-        }
+
+        loadCart();
     </script>
     <%- include('./partials/scripts'); %>
 </body>

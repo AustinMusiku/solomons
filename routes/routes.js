@@ -104,11 +104,37 @@ router.post('/removeFromCart', (req, res) => {
 })
 
 router.post('/incrementCartItem', (req, res) => {
-    
+    console.log('/incrementCartItem');
+    // fetch product
+    let incrementedCartItem = [];
+    req.session.cart.forEach(item => {
+        if(item.Id == req.body.itemId){
+            item.Quantity++;
+            incrementedCartItem.push(item);
+        }
+    });
+    console.log(incrementedCartItem);
+    res.json({ 
+        msg: `incremented ${incrementedCartItem[0].Title}`,
+        newQuantity: incrementedCartItem[0].Quantity
+      });
 })
 
 router.post('/decrementCartItem', (req, res) => {
-
+    console.log('/decrementCartItem');
+    // fetch product
+    let incrementedCartItem = [];
+    req.session.cart.forEach(item => {
+        if(item.Id == req.body.itemId){
+            item.Quantity--;
+            incrementedCartItem.push(item);
+        }
+    });
+    console.log(incrementedCartItem);
+    res.json({ 
+        msg: `incremented ${incrementedCartItem[0].Title}`,
+        newQuantity: incrementedCartItem[0].Quantity
+      });
 })
 
 module.exports = router;
