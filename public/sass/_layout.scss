@@ -77,7 +77,11 @@ header{
 }
 
 .header-minor{
-    height: 40vh;
+    height: 30vh;
+
+    .hero-grid{
+        top: 55%;
+    }
 }
 
 
@@ -157,7 +161,7 @@ header{
 // -----Contact------
 #contact{
     .container{
-        padding: 6em;
+        padding: 2em;
         .contact-text{
             display: grid;
             grid-template-columns: 1fr;
@@ -293,6 +297,51 @@ header{
 }
 
 
+// -----contact form-----
+// -----contact form-----
+
+.contact-form{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 1.5em;
+    padding: 2em;
+    width: 100%;
+    max-width: 500px;
+    // background-color: $secondary;
+
+    *{
+        text-align: left;
+    }
+
+    .form-field{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: .5em;
+
+        label{
+            text-transform: capitalize;
+        }
+
+        input,
+        textarea{
+            padding: 1em;
+            border: none;
+            background-color: $secondary;
+        }
+        
+        .radio{
+            display: flex;
+            flex-direction: row;
+            gap: 1em;
+        }
+    }
+    button{
+        width: 100%;
+        outline: none;
+        border: none;
+        text-align: center;
+    }
+}
 
 // -----FOOTER------
 // -----FOOTER------

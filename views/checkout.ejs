@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Solomons Honey | Shop </title>
+</head>
+<body>
+    <header class="header-minor">
+        <%- include('./partials/nav') %>
+        <div class="hero-grid grid">
+            <div class="hero">
+                <h3 class="caption">complete your order</h3>
+                <h1 class="title">Checkout</h1>
+            </div>
+        </div>
+    </header>
+
+    <section id="shop" class="grid">
+        <div class="container">
+            <div class="section-heading">
+                <h3 class="caption">Details</h3>
+                <h2 class="sub-title">Contact information</h2>
+            </div>
+
+            <form action="/checkout" method="POST" class="contact-form">
+                <div class="form-field form-name">
+                    <label for="name">Name</label>
+                    <input name="name" type="text" class="name" placeholder="name">
+                </div>
+                <div class="form-field form-email">
+                    <label for="email">email</label>
+                    <input name="email" type="email" class="email" placeholder="email">
+                </div>
+                <div class="form-field form-address">
+                    <label for="address">Address</label>
+                    <input name="address" type="text" class="address" placeholder="2488">
+                </div>
+                <div class="form-field form-phone">
+                    <label for="phone">Phone</label>
+                    <input name="phone" type="number" class="address" placeholder="0700000000">
+                </div>
+                <div class="form-field form-payment">
+                    <label for="payment">Payment method</label>
+                    <div class="radio">
+                        <input type="radio" name="payment" id="mpesa" value="mpesa">
+                        <label for="mpesa">M-pesa on delivery</label>
+                    </div>
+                    
+                    <div class="radio">
+                        <input type="radio" name="payment" id="cash" value="cash">
+                        <label for="cash">Cash on delivery</label>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn cta">Place order</button>
+            </form>
+        </div>
+    </section>
+
+    <%- include('./partials/footer') %>
+
+    <!--scripts-->
+    <script>
+        window.onload(()=>{
+            prompt('Are you satisfied with your cart?');
+        })
+    </script>
+    <%- include('./partials/scripts'); %>
+</body>
+</html>
+
+
+
+
+
+
+

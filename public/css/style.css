@@ -195,7 +195,10 @@ header .hero-grid .hero h1 {
 }
 
 .header-minor {
-  height: 40vh;
+  height: 30vh;
+}
+.header-minor .hero-grid {
+  top: 55%;
 }
 
 #why-us .container .water-mark {
@@ -235,7 +238,7 @@ header .hero-grid .hero h1 {
 }
 
 #contact .container {
-  padding: 6em;
+  padding: 2em;
 }
 #contact .container .contact-text {
   display: grid;
@@ -335,6 +338,43 @@ header .hero-grid .hero h1 {
 }
 #cart .container .cart-total .cart-total-controls .btn {
   font-size: 0.8em;
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 1.5em;
+  padding: 2em;
+  width: 100%;
+  max-width: 500px;
+}
+.contact-form * {
+  text-align: left;
+}
+.contact-form .form-field {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5em;
+}
+.contact-form .form-field label {
+  text-transform: capitalize;
+}
+.contact-form .form-field input,
+.contact-form .form-field textarea {
+  padding: 1em;
+  border: none;
+  background-color: #f0f0f0;
+}
+.contact-form .form-field .radio {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+.contact-form button {
+  width: 100%;
+  outline: none;
+  border: none;
+  text-align: center;
 }
 
 footer .container .three-part-footer {

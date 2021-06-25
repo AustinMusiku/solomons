@@ -6,8 +6,9 @@ const controllers = require('../controllers/controllers')
 let db = require('../config/db');
 
 // MIDLEWARE
-router.use(express.urlencoded({extended: true}));
+router.use(express.urlencoded({extended: false}));
 router.use(express.json());
+router.use(express.raw());
 router.use((req, res, next) => {
     // assign new session userId for first time visitors
     if(!req.session.userId){
@@ -137,4 +138,23 @@ router.post('/decrementCartItem', (req, res) => {
       });
 })
 
+router.post('/checkout', (req, res) => {
+    console.log('/checkout');
+    let { name, email, address, phone, payment } = req.body;
+    // store order details in database
+    let amount = 0;
+    req.session.cart.forEach(cartItem => {
+        amount = amount + (cartItem.Unit_Price * cartItem.Quantity);
+    })
+    let queryString = "INSERT INTO orders(Name, Email, Address, Phone, Payment, Amount, Cart) values(?,?,?,?,?,?,?)";
+    let queryValues = [ name, email, address, phone, payment, amount, JSON.stringify(req.session.cart) ]
+    db.query(queryString, queryValues, (err, rows, fields) => {
+        if(err){
+            throw err;
+        }else{
+            console.log('saved to database');
+        }
+    })
+    res.json({ msg: "checkout"});
+})
 module.exports = router;
