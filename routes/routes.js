@@ -64,7 +64,10 @@ router.get('/checkout', (req, res) => {
     console.log('/checkout');
     res.render('checkout', { msg: "checkout"})
 })
-
+router.get('/cartItemsTotal', (req, res) => {
+    console.log('/cartItemsTotal');
+    res.json({ total: req.session.cart.length});
+})
 
 // POST REQUESTS
 router.post('/addToCart', (req, res) => {
@@ -155,6 +158,7 @@ router.post('/checkout', (req, res) => {
             console.log('saved to database');
         }
     })
-    res.json({ msg: "checkout"});
+    req.session.cart = [];
+    res.render('checkout', { msg: "order successful!"})
 })
 module.exports = router;

@@ -43,17 +43,17 @@
                     <label for="payment">Payment method</label>
                     <div class="radio">
                         <input type="radio" name="payment" id="mpesa" value="mpesa">
-                        <label for="mpesa">M-pesa on delivery</label>
+                        <label for="mpesa"><p>M-pesa on delivery</p></label>
                     </div>
                     
                     <div class="radio">
                         <input type="radio" name="payment" id="cash" value="cash">
-                        <label for="cash">Cash on delivery</label>
+                        <label for="cash"><p>Cash on delivery</p></label>
                     </div>
                 </div>
 
 
-                <button type="submit" class="btn cta">Place order</button>
+                <button type="submit" class="btn cta submit">Place order</button>
             </form>
         </div>
     </section>
@@ -61,12 +61,10 @@
     <%- include('./partials/footer') %>
 
     <!--scripts-->
-    <script>
-        window.onload(()=>{
-            prompt('Are you satisfied with your cart?');
-        })
-    </script>
     <%- include('./partials/scripts'); %>
+    <script>
+        noOfCartItems();
+    </script>
 </body>
 </html>
 

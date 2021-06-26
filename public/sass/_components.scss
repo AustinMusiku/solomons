@@ -27,8 +27,34 @@ nav{
             }
         }
 
-        .ham-menu{
-            display: none;
+        .nav-right{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 1.75em;
+            align-items: center;
+
+            .cart-icon{
+                position: relative;
+                width: 33px;
+
+                .cart-total{
+                    position: absolute;
+                    display: grid;
+                    place-items: center;
+                    right: -5px;
+                    width: 15px;
+                    height: 15px;
+                    font-size: 12px;
+                    border-radius: 50%;
+                    background-color: $accent
+
+                }
+            }
+
+            .ham-menu{
+                display: none;
+            }
         }
     }
 }
@@ -125,44 +151,46 @@ a{
                 }
             }
     
-            .ham-menu{
-                position: relative;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                width: 45px;
-                height: 15px;
-                z-index: 100;
+            .nav-right{
+                .ham-menu{
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    width: 45px;
+                    height: 15px;
+                    z-index: 100;
+        
+                    .ham-layer{
+                        position: absolute;
+                        width: 75%;
+                        height: 3px;
+                        background-color: $dark;
+                        border-radius: 50px;
+                        transition: .05s ease-in;
     
-                .ham-layer{
-                    position: absolute;
-                    width: 75%;
-                    height: 3px;
-                    background-color: $dark;
-                    border-radius: 50px;
-                    transition: .05s ease-in;
-
-                    &.ham-layer-left{
-                        left: 0;
-                        top: 0;
-                    }
-                    &.ham-layer-right{
-                        right: 0;
-                        bottom: 0;
-                    }
-
-                    &.ham-layer-left,
-                    &.ham-layer-right{
-
-                        &.active{
-                            width: 100%;
-                            top: 50%;
-                            transform: translateY(-50%);
-                            background-color: $light;
-                            transition: .05s ease-in;
+                        &.ham-layer-left{
+                            left: 0;
+                            top: 0;
                         }
+                        &.ham-layer-right{
+                            right: 0;
+                            bottom: 0;
+                        }
+    
+                        &.ham-layer-left,
+                        &.ham-layer-right{
+    
+                            &.active{
+                                width: 100%;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                background-color: $light;
+                                transition: .05s ease-in;
+                            }
+                        }
+                        
                     }
-                    
                 }
             }
         }

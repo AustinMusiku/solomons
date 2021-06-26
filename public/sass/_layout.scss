@@ -95,7 +95,7 @@ header{
         .banner-img{
             margin-bottom: 4em;
             img{
-                height: 90vh;
+                
             }
         }
         .why-us{
@@ -304,10 +304,8 @@ header{
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     row-gap: 1.5em;
-    padding: 2em;
     width: 100%;
     max-width: 500px;
-    // background-color: $secondary;
 
     *{
         text-align: left;
@@ -333,6 +331,9 @@ header{
             display: flex;
             flex-direction: row;
             gap: 1em;
+            align-items: center;
+
+            input{}
         }
     }
     button{

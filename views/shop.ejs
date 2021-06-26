@@ -17,11 +17,6 @@
 
     <section id="shop" class="grid">
         <div class="container">
-            <div class="section-heading">
-                <h3 class="caption">Who are we</h3>
-                <h2 class="sub-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda?</h2>
-            </div>
-
             <div class="products-grid">
                 <% products.forEach((product) => { %>
                     <div class="product">
@@ -40,6 +35,7 @@
     <%- include('./partials/footer') %>
 
     <!--scripts-->
+    <%- include('./partials/scripts'); %>
     <script>
         let addToCart = async (itemId)=> {
             let url = '/addToCart';
@@ -53,9 +49,10 @@
                     body: JSON.stringify(data)
                 })
             let res = await response.json();
-            console.log(res); 
+            console.log(res);
+            await noOfCartItems();
         }
+        noOfCartItems();
     </script>
-    <%- include('./partials/scripts'); %>
 </body>
 </html>

@@ -38,6 +38,7 @@
     <%- include('./partials/footer') %>
 
     <!--scripts-->
+    <%- include('./partials/scripts'); %>
     <script>
         let cartGrid = document.querySelector('.cart-grid');
         
@@ -52,7 +53,14 @@
             console.log(total);
             document.querySelector('.total').innerHTML = total;
         }
-
+        let noOfCartItems2 = async ()=>{
+            let cartItems = Array.from(document.querySelectorAll('.cart-item'));
+            if(!cartItems.length){
+                navCartTotal.innerHTML = 0;
+            }else{
+                navCartTotal.innerHTML = cartItems.length;
+            }
+        }
         async function loadCart(e){
             let url = '/getCartItems';
             let response = await fetch(url);
@@ -78,7 +86,8 @@
                 cartGrid.appendChild(cartItemm);
                 cartItemm.classList.add('cart-item');
                 cartItemm.innerHTML = item;
-                cartTotal()
+                cartTotal();
+                noOfCartItems2();
             });
         }
 
@@ -104,6 +113,7 @@
             })
             console.log(res);
             await cartTotal();
+            await noOfCartItems2();
         }
 
         let decrementCartItem = async(itemId, thise) => {
@@ -128,6 +138,7 @@
                 console.log(res);
                 thise.nextSibling.innerHTML = res.newQuantity;
                 await cartTotal();
+                await noOfCartItems2();
             }
         }
 
@@ -147,10 +158,10 @@
             console.log(res);
             thise.previousSibling.innerHTML = res.newQuantity;
             await cartTotal();
+            await noOfCartItems2();
         }
 
         loadCart();
     </script>
-    <%- include('./partials/scripts'); %>
 </body>
 </html>
