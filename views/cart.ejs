@@ -17,10 +17,18 @@
 
     <section id="cart" class="grid">
         <div class="container">
+            <!--Renders warning box if no items are in cart-->
+            <div class="alert-box no-Items">
+                <p class="alert-box-text">You have no Items in cart, <a href="/shop">return to shop</a></p>
+            </div>
+
+            <!--Cart tems are rendered here after iteration-->
             <div class="cart-grid">
                 
             </div>
             
+            <!--Hides checkout button if no items are in cart-->
+            <% if (cartTotalItems > 0) { %>
             <div class="cart-total">
                 <div class="cart-total-txt">
                     <p>Total</p>
@@ -31,7 +39,8 @@
                     <a class="btn cta" href="/checkout">Checkout</a>
                 </div>
             </div>
-                
+            <% } %>
+
         </div>
     </section>
 
@@ -50,7 +59,6 @@
                 let quantity = cartItem.children[0].children[1].children[0].children[1].innerHTML;
                 total = total + (unitPrice*quantity);
             })
-            console.log(total);
             document.querySelector('.total').innerHTML = total;
         }
         let noOfCartItems2 = async ()=>{
@@ -65,6 +73,10 @@
             let url = '/getCartItems';
             let response = await fetch(url);
             let data = await response.json();
+
+            if(data.cartItems == 0){
+                alertToggle();
+            }
 
             data.cartItems.forEach(cartItem => {
                 let item = `
@@ -104,13 +116,20 @@
             });
             let res = await response.json();
             let itemName = res.rowTitle;
-            let cartItems = document.querySelectorAll('.cart-item');
+            let cartItems = Array.from(document.querySelectorAll('.cart-item'));
             cartItems.forEach(cartItem => {
                 if(cartItem.children[0].children[0].children[0].innerHTML == itemName){
                     // removes node
                     cartItem.remove();
                 }
             })
+
+            // if no item left in cart, display alert box and hide checkout button
+            let newCartItems = Array.from(document.querySelectorAll('.cart-item'))
+            if(newCartItems.length == 0 ){
+                alertToggle()
+                document.querySelector('.cart-total-controls').style.display = 'none'
+            }
             console.log(res);
             await cartTotal();
             await noOfCartItems2();

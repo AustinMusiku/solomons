@@ -67,8 +67,25 @@ nav{
 
 }
 
+// allert box
+.alert-box{
+    width: 100%;
+    background-color: $saccent;
+    padding: 1em;
+    font-size: $ff-xsm;
+    display: none;
 
+    a{
+        text-decoration: underline;
 
+        &:hover{
+            color: $dark;
+        }
+    }
+}
+.alert-box.active{
+    display: block;
+}
 // buttons and cta(s)
 .btn,
 button{

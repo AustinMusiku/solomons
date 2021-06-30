@@ -17,6 +17,9 @@
 
     <section id="shop" class="grid">
         <div class="container">
+            <div class="alert-box">
+                <p class="alert-box-text"></p>
+            </div>
             <div class="products-grid">
                 <% products.forEach((product) => { %>
                     <div class="product">
@@ -51,6 +54,9 @@
             let res = await response.json();
             console.log(res);
             await noOfCartItems();
+            alertToggle();
+            document.querySelector('.alert-box-text').innerHTML = res.msg;
+            setTimeout(alertToggle, 3000);
         }
         noOfCartItems();
     </script>

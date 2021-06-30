@@ -53,6 +53,24 @@ nav .container .nav-right .ham-menu {
   z-index: -10;
 }
 
+.alert-box {
+  width: 100%;
+  background-color: #ffbd3a8c;
+  padding: 1em;
+  font-size: 0.8em;
+  display: none;
+}
+.alert-box a {
+  text-decoration: underline;
+}
+.alert-box a:hover {
+  color: #121212;
+}
+
+.alert-box.active {
+  display: block;
+}
+
 .btn,
 button {
   margin: 0;

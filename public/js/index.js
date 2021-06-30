@@ -6,6 +6,7 @@ let ham3 = document.querySelector('.ham-layer-bottom');
 let navLinks = document.querySelector('.nav-links');
 let navLinkButtons = document.querySelectorAll('.nav-link');
 let navCartTotal = document.querySelector('.cart-total');
+let alertBox = document.querySelector('.alert-box');
 
 // navigation
 menu.addEventListener('click', () => {
@@ -24,6 +25,7 @@ navLinkButtons.forEach(btn => {
     })
 })
 
+// update nav bar cart icon's number of items in cart
 let noOfCartItems = async ()=>{
     let url = '/cartItemsTotal';
     let response = await fetch(url);
@@ -34,4 +36,9 @@ let noOfCartItems = async ()=>{
     }else{
         navCartTotal.innerHTML = data.total;
     }
+}
+
+// toggle alertbox
+let alertToggle = ()=> {
+    alertBox.classList.toggle('active')
 }

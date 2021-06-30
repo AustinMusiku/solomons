@@ -54,7 +54,7 @@ router.get('/cart', (req, res) => {
     // assign cart items to cart
     //  let cart = req.session.cart;
     //  res.render('cart', { msg: "cart", cart: cart})
-    res.render('cart', { msg: "cart" })
+    res.render('cart', { msg: "cart" , cartTotalItems: req.session.cart.length})
 })
 router.get('/getCartItems', (req, res) => {
     let cartItems = req.session.cart;
