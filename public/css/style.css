@@ -103,7 +103,7 @@ a .cta2 {
     padding: 8em 4em;
     width: 100vw;
     height: 100vh;
-    left: -200%;
+    right: -200%;
     top: 0;
     background-color: #121212;
     z-index: 20;
@@ -120,39 +120,43 @@ a .cta2 {
     background-color: #ffbc3a;
   }
   nav .container .nav-links.active {
-    left: 0%;
+    right: 0%;
+  }
+  nav .container .nav-right .cart-icon a {
+    display: grid;
   }
   nav .container .nav-right .ham-menu {
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 45px;
-    height: 15px;
+    justify-content: space-around;
+    width: 32px;
+    height: 21px;
+    overflow: hidden;
     z-index: 100;
   }
   nav .container .nav-right .ham-menu .ham-layer {
-    position: absolute;
-    width: 75%;
+    position: relative;
+    width: 100%;
     height: 3px;
     background-color: #121212;
-    border-radius: 50px;
+    border-radius: 1px;
     transition: 0.05s ease-in;
   }
-  nav .container .nav-right .ham-menu .ham-layer.ham-layer-left {
-    left: 0;
-    top: 0;
-  }
-  nav .container .nav-right .ham-menu .ham-layer.ham-layer-right {
-    right: 0;
-    bottom: 0;
-  }
-  nav .container .nav-right .ham-menu .ham-layer.ham-layer-left.active, nav .container .nav-right .ham-menu .ham-layer.ham-layer-right.active {
-    width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
+  nav .container .nav-right .ham-menu .ham-layer.ham-layer-top.active, nav .container .nav-right .ham-menu .ham-layer.ham-layer-mid.active, nav .container .nav-right .ham-menu .ham-layer.ham-layer-bottom.active {
     background-color: #fff;
+  }
+  nav .container .nav-right .ham-menu .ham-layer.ham-layer-top.active {
+    transform: translateY(7px) rotate(45deg);
+    transition: 0.1s ease-in;
+  }
+  nav .container .nav-right .ham-menu .ham-layer.ham-layer-mid.active {
+    transform: translateX(100%);
     transition: 0.05s ease-in;
+  }
+  nav .container .nav-right .ham-menu .ham-layer.ham-layer-bottom.active {
+    transform: translateY(-7px) rotate(-45deg);
+    transition: 0.1s ease-in;
   }
 }
 .grid {
