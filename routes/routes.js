@@ -4,6 +4,7 @@ const controllers = require('../controllers/controllers')
 
 // initialize database connection
 let db = require('../config/db');
+const { request } = require('express');
 
 // MIDLEWARE
 router.use(express.urlencoded({extended: false}));
@@ -51,10 +52,7 @@ router.get('/faqs', (req, res) => {
 
 router.get('/cart', (req, res) => {
     console.log(`/cart  - ${req.session.userId}`);
-    // assign cart items to cart
-    //  let cart = req.session.cart;
-    //  res.render('cart', { msg: "cart", cart: cart})
-    res.render('cart', { msg: "cart" , cartTotalItems: req.session.cart.length})
+    !req.session.cart ? res.render('cart', { msg: "cart" , cartTotalItems: 0}) : res.render('cart', { msg: "cart" , cartTotalItems: req.session.cart.length});
 })
 router.get('/getCartItems', (req, res) => {
     let cartItems = req.session.cart;
@@ -66,7 +64,8 @@ router.get('/checkout', (req, res) => {
 })
 router.get('/cartItemsTotal', (req, res) => {
     console.log('/cartItemsTotal');
-    res.json({ total: req.session.cart.length});
+    console.log(req.session)
+    !req.session.cart ? res.json({ total: 0}) : res.json({ total: req.session.cart.length});
 })
 
 // POST REQUESTS

@@ -42,7 +42,6 @@ app.set('views', path.join(__dirname + '/views'));
 
 // server listen
 let port = process.env.PORT || 3000;
-console.log(process.env.PORT);
 
 app.listen(port, () => {
     console.log(`server started on port ${port}`);
