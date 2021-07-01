@@ -22,7 +22,8 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
-    "watch": "sass --watch public/sass/style.scss public/css/style.css"
+    "watch": "sass --watch public/sass/style.scss public/css/style.css",
+    "build": "sass --build public/sass/style.scss public/css/style.css"
   },
   "author": "",
   "license": "ISC"

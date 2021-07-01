@@ -32,7 +32,7 @@ CREATE TABLE `orders` (
   `Amount` int(11) NOT NULL,
   `Cart` mediumtext NOT NULL,
   PRIMARY KEY (`Order_Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `sessions` (
   `expires` int(11) unsigned NOT NULL,
   `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
   PRIMARY KEY (`session_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('W13W0xFgOjKXVjNoDhBUIegrKYbLXfcJ',1625173796,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"userId\":\"8a614fdf-1534-4eb1-9d42-285b8af2806a\",\"cart\":[{\"Id\":2,\"Title\":\"1kg Honey Jar\",\"Unit_Price\":280,\"Img_Url\":\"/public/assets/jar.jpg\",\"Quantity\":\"1\"},{\"Id\":4,\"Title\":\"2kg Honey Jar\",\"Unit_Price\":420,\"Img_Url\":\"/public/assets/jar.jpg\",\"Quantity\":\"1\"}]}'),('gVbho71TjpxddNQfoCDod5zIso9k8zVW',1625154377,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"userId\":\"6bcf2321-9a2c-4758-b215-769da568b228\"}');
+/*INSERT INTO `sessions` VALUES ('W13W0xFgOjKXVjNoDhBUIegrKYbLXfcJ',1625173796,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"userId\":\"8a614fdf-1534-4eb1-9d42-285b8af2806a\",\"cart\":[{\"Id\":2,\"Title\":\"1kg Honey Jar\",\"Unit_Price\":280,\"Img_Url\":\"/public/assets/jar.jpg\",\"Quantity\":\"1\"},{\"Id\":4,\"Title\":\"2kg Honey Jar\",\"Unit_Price\":420,\"Img_Url\":\"/public/assets/jar.jpg\",\"Quantity\":\"1\"}]}'),('gVbho71TjpxddNQfoCDod5zIso9k8zVW',1625154377,'{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"userId\":\"6bcf2321-9a2c-4758-b215-769da568b228\"}');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
