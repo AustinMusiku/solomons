@@ -74,6 +74,7 @@ nav{
     padding: 1em;
     font-size: $ff-xsm;
     display: none;
+    transition: 1.25s;
 
     a{
         text-decoration: underline;

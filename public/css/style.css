@@ -59,6 +59,7 @@ nav .container .nav-right .ham-menu {
   padding: 1em;
   font-size: 0.8em;
   display: none;
+  transition: 1.25s;
 }
 .alert-box a {
   text-decoration: underline;
