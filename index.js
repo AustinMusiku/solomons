@@ -17,8 +17,8 @@ let options = {
     host: 'localhost',
     port: 3306,
     user: process.env.DATABASE_USER || 'root',
-    password: process.env.PASSWORD || '70949901',
-    database: process.env.NAME || 'solomons'
+    password: process.env.DATABASE_PASSWORD || '70949901',
+    database: process.env.DATABASE_NAME || 'solomons'
 }
 let sessionStore = new mySQLStore(options);
 
