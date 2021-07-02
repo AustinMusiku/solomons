@@ -4,8 +4,7 @@ const controllers = require('../controllers/controllers')
 
 // initialize database connection
 let db = require('../config/db');
-const { request } = require('express');
-
+// const { request } = require('express');
 // MIDLEWARE
 router.use(express.urlencoded({extended: false}));
 router.use(express.json());
@@ -52,6 +51,7 @@ router.get('/faqs', (req, res) => {
 
 router.get('/cart', (req, res) => {
     console.log(`/cart  - ${req.session.userId}`);
+    // return 0 if cart is empty else return total number of items in cart 
     !req.session.cart ? res.render('cart', { msg: "cart" , cartTotalItems: 0}) : res.render('cart', { msg: "cart" , cartTotalItems: req.session.cart.length});
 })
 router.get('/getCartItems', (req, res) => {
@@ -64,7 +64,7 @@ router.get('/checkout', (req, res) => {
 })
 router.get('/cartItemsTotal', (req, res) => {
     console.log('/cartItemsTotal');
-    console.log(req.session)
+    // return 0 if cart is empty else return total number of items in cart
     !req.session.cart ? res.json({ total: 0}) : res.json({ total: req.session.cart.length});
 })
 
@@ -96,6 +96,7 @@ router.post('/removeFromCart', (req, res) => {
     // fetch product
     controllers.getItemById(itemId)
         .then(row => {
+            // filter out selected cart item
             req.session.cart = req.session.cart.filter(product => {
                 return product.Id != row.Id;
             })
@@ -110,6 +111,7 @@ router.post('/incrementCartItem', (req, res) => {
     console.log('/incrementCartItem');
     // fetch product
     let incrementedCartItem = [];
+    // loop through the cart and increment selected item
     req.session.cart.forEach(item => {
         if(item.Id == req.body.itemId){
             item.Quantity++;
@@ -127,6 +129,7 @@ router.post('/decrementCartItem', (req, res) => {
     console.log('/decrementCartItem');
     // fetch product
     let incrementedCartItem = [];
+    // loop through cart and decrement selected item
     req.session.cart.forEach(item => {
         if(item.Id == req.body.itemId){
             item.Quantity--;
@@ -142,12 +145,15 @@ router.post('/decrementCartItem', (req, res) => {
 
 router.post('/checkout', (req, res) => {
     console.log('/checkout');
+    // get user form details
     let { name, email, address, phone, payment } = req.body;
     // store order details in database
     let amount = 0;
+    // calculate total order amount 
     req.session.cart.forEach(cartItem => {
         amount = amount + (cartItem.Unit_Price * cartItem.Quantity);
     })
+    // insert order details to orders table in database
     let queryString = "INSERT INTO orders(Name, Email, Address, Phone, Payment, Amount, Cart) values(?,?,?,?,?,?,?)";
     let queryValues = [ name, email, address, phone, payment, amount, JSON.stringify(req.session.cart) ]
     db.query(queryString, queryValues, (err, rows, fields) => {
@@ -157,7 +163,9 @@ router.post('/checkout', (req, res) => {
             console.log('saved to database');
         }
     })
+    // reset the cart
     req.session.cart = [];
     res.render('checkout', { msg: "order successful!"})
 })
+
 module.exports = router;
