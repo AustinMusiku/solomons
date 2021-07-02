@@ -3,7 +3,9 @@ const router = express.Router();
 const controllers = require('../controllers/controllers')
 
 // initialize database connection
-let db = require('../config/db');
+const handleDisconnect = require('../config/db');
+handleDisconnect()
+
 // const { request } = require('express');
 // MIDLEWARE
 router.use(express.urlencoded({extended: false}));
